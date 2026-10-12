@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WashPilot — Smart Laundry Assistant</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-icon">W</span>
+        WashPilot<span class="brand-dot">.</span>
+      </a>
+
+      <div class="nav-right">
+        <a href="#planner">Planner</a>
+        <a href="#saved">Saved Plans</a>
+        <button id="themeToggle" class="theme-btn" type="button">
+          🌙 Dark
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">
+          <span class="live-dot"></span>
+          Your Smart Laundry Companion
+        </div>
+
+        <h1>
+          Better laundry.
+          <span>Less guesswork.</span>
+        </h1>
+
+        <p>
+          Build your laundry basket, find the right
+          washing settings and keep your clothes
+          looking their best.
+        </p>
+
+        <a href="#planner" class="hero-button">
+          Create a wash plan →
+        </a>
+      </div>
+
+      <div class="hero-panel">
+        <div class="panel-icon">✳</div>
+        <div class="panel-title">How it works</div>
+
+        <div class="step">
+          <span>01</span>
+          <div>
+            <strong>Choose your clothes</strong>
+            <p>Add garments, colors and care labels.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span>02</span>
+          <div>
+            <strong>Get smart recommendations</strong>
+            <p>Find a suitable program and temperature.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <span>03</span>
+          <div>
+            <strong>Save your wash plan</strong>
+            <p>Keep your favorite settings for later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="planner" class="section-heading">
+      <div>
+        <span class="section-label">WASH PLANNER</span>
+        <h2>Let's plan your next load.</h2>
+        <p>Select your clothes and build your laundry basket.</p>
+      </div>
+    </section>
+
+    <div class="planner-grid">
+
+      <section class="card">
+        <div class="card-header">
+          <span class="number">01</span>
+          <div>
+            <h3>Add your clothes</h3>
+            <p>Tell us what you're washing.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="typeInput">Clothing type</label>
+          <select id="typeInput">
+            <option value="tshirt">T-Shirt</option>
+            <option value="sportswear">Sportswear</option>
+            <option value="shirt">Shirt</option>
+            <option value="underwear">Underwear</option>
+            <option value="towel">Towel</option>
+            <option value="bedsheet">Bedsheet</option>
+            <option value="jeans">Jeans</option>
+            <option value="wool">Wool Clothing</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="colorInput">Color</label>
+            <select id="colorInput">
+              <option value="white">White</option>
+              <option value="light">Light Colors</option>
+              <option value="dark">Dark Colors</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="careInput">Care label</label>
+            <select id="careInput">
+              <option value="30">Max 30°C</option>
+              <option value="40">Max 40°C</option>
+              <option value="60">Max 60°C</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="quantityInput">Quantity</label>
+          <input
+            type="number"
+            id="quantityInput"
+            value="1"
+            min="1"
+            max="20"
+          >
+        </div>
+
+        <p id="formMessage" class="form-message" role="status"></p>
+
+        <button id="addBtn" class="btn btn-primary" type="button">
+          + Add to Basket
+        </button>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <span class="number">02</span>
+          <div>
+            <h3>Your laundry basket</h3>
+            <p>Everything you're planning to wash.</p>
+          </div>
+        </div>
+
+        <div class="basket-summary">
+          <span id="basketCount">0 items</span>
+          <span id="basketWeight">0.0 / 7 kg</span>
+        </div>
+
+        <div id="basketList" class="basket-list">
+          <div class="empty-state">
+            <div class="empty-icon">◌</div>
+            Your basket is empty.
+          </div>
+        </div>
+
+        <div class="field soil-field">
+          <label for="soilInput">Soil level</label>
+          <select id="soilInput">
+            <option value="light">Lightly worn</option>
+            <option value="normal" selected>Normally dirty</option>
+            <option value="heavy">Heavily soiled</option>
+          </select>
+        </div>
+
+        <div class="basket-actions">
+          <button id="clearBasketBtn" class="btn btn-secondary" type="button">
+            Clear All
+          </button>
+
+          <button id="generateBtn" class="btn btn-primary" type="button">
+            Generate Plan →
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="card result-card">
+      <div class="card-header">
+        <span class="number">03</span>
+        <div>
+          <h3>Your wash recommendation</h3>
+          <p>Your personalized washing settings.</p>
+        </div>
+      </div>
+
+      <div id="resultEmpty" class="empty-state result-empty">
+        <div class="empty-icon">✳</div>
+        <strong>Your perfect wash starts here.</strong>
+        <p>Add clothes and generate a plan to see your results.</p>
+      </div>
+
+      <div id="resultContent" class="is-hidden">
+
+        <div class="result-main">
+          <span id="planStatus" class="status"></span>
+          <h2 id="planProgram"></h2>
+          <p id="planDescription"></p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <span>Temperature</span>
+            <strong id="planTemperature"></strong>
+          </div>
+
+          <div class="stat">
+            <span>Spin Speed</span>
+            <strong id="planSpin"></strong>
+          </div>
+
+          <div class="stat">
+            <span>Estimated Load</span>
+            <strong id="planWeight"></strong>
+          </div>
+        </div>
+
+        <div class="care-notes">
+          <h4>Care recommendations</h4>
+          <ul id="planNotes"></ul>
+        </div>
+
+        <button id="savePlanBtn" class="btn btn-primary save-btn" type="button">
+          Save This Plan
+        </button>
+
+        <p id="saveMessage" class="form-message" role="status"></p>
+      </div>
+    </section>
+
+    <section id="saved" class="card saved-card">
+      <div class="saved-heading">
+        <div>
+          <span class="section-label">YOUR HISTORY</span>
+          <h3>Saved wash plans</h3>
+          <p>Your previous washing recommendations.</p>
+        </div>
+
+        <button id="clearSavedBtn" class="btn btn-secondary" type="button">
+          Clear History
+        </button>
+      </div>
+
+      <div id="savedList" class="saved-list">
+        <p class="empty-saved">No saved plans yet.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 WashPilot</span>
+      <span>Made with care for your clothes.</span>
+    </div>
+
+    <p class="footer-disclaimer">
+      Always follow the manufacturer's care labels.
+    </p>
+  </footer>
+
+</body>
+</html>
